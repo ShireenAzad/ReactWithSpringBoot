@@ -9,6 +9,30 @@ const AddEmployeeComponent = () => {
   const [everestEmailId, setEverestEmailId] = useState("");
   const [password, setPassword] = useState("");
   const [personalEmailId, setPersonalEmailId] = useState("");
+  const[addressLine1,setAddressLine1]=useState("")
+  const[addressLine2,setAddressLine2]=useState("")
+  const[city,setCity]=useState("")
+  const[state,setState]=useState("")
+ const[zipCode,setZipCode]=useState("")
+ const[id]=useState("")
+ const[presentAddress,setPresentAddress]=useState({
+  id:'',
+  addressLine1:'',
+  addressLine2:'',
+  city:'',
+  state:'',
+  zipCode:''
+ })
+
+
+ const[permanentAddress,setPermanentAddress]=useState({
+  id:'',
+  addressLine1:'',
+  addressLine2:'',
+  city:'',
+  state:'',
+  zipCode:''
+ })
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!firstName || !everestEmailId || !password) {
@@ -21,8 +45,11 @@ const AddEmployeeComponent = () => {
       everestEmailId,
       password,
       personalEmailId,
+      presentAddress,
+      permanentAddress 
+      
     };
-
+    
     employeeService
       .createEmployee(employee)
       .then((response) => {
@@ -32,7 +59,13 @@ const AddEmployeeComponent = () => {
         setEverestEmailId("");
         setPassword("");
         setPersonalEmailId("");
-        console.log(empId);
+      
+        setPresentAddress(setAddressLine1(""),setAddressLine2(""),setCity(""),setState(""),setZipCode(""));
+    
+  
+       setPermanentAddress(setAddressLine1(""),setAddressLine2(""),setCity(""),setState(""),setZipCode(""));
+  
+  
       })
       .catch((e) => console.log("error", e));
   };
@@ -103,6 +136,120 @@ const AddEmployeeComponent = () => {
               onChange={(e) => setPersonalEmailId(e.target.value)}
             />
           </div>
+          <div className="form-group col-md-5">
+            <label htmlFor="addressLine1">Address Line1</label>
+            <input
+              id="addressLine1"
+              placeholder={"Enter the AddressLine1"}            
+                className="form-control col-md-12"
+            type="text"
+            value={presentAddress.addressLine1}
+              onChange={(e) =>setPresentAddress({...presentAddress,addressLine1:e.target.value})}
+              
+            />
+          </div>
+          <div className="form-group col-md-5">
+            <label htmlFor="addressLine2">Address Line2</label>
+            <input
+              id="addressLine2"
+              placeholder={"Enter the AddressLine2"}
+              className="form-control col-md-12"
+             type="text"
+             value={presentAddress.addressLine2}
+              onChange={(e) => setPresentAddress({...presentAddress,addressLine2:e.target.value})}
+            />
+          </div>
+          <div className="form-group col-md-5">
+            <label htmlFor="city">City</label>
+            <input
+              id="city"
+              placeholder={"Enter the city"}
+              className="form-control col-md-12"
+              type="text"
+              value={presentAddress.city}
+             
+              onChange={(e) => setPresentAddress({...presentAddress,city:e.target.value})}
+            />
+          </div>
+          <div className="form-group col-md-5">
+            <label htmlFor="state">State</label>
+            <input
+              id="state"
+              placeholder={"Enter the state"}
+              className="form-control col-md-12"
+          type="text"
+          value={presentAddress.state}
+      
+              onChange={(e) =>setPresentAddress({...presentAddress,state:e.target.value})}
+            />
+          </div>
+          <div className="form-group col-md-10">
+            <label htmlFor="zipCode">Zip Code</label>
+            <input
+              id="zipCode"
+              placeholder={"Enter the zipCode"}
+              className="form-control col-md-12"
+              type="number"
+              value={presentAddress.zipCode}
+               onChange={(e) => setPresentAddress({...presentAddress,zipCode:e.target.value})}
+            />
+          
+            </div>
+            <div className="form-group col-md-5">
+            <label htmlFor="addressLine1">Address Line1</label>
+            <input
+              id="addressLine1"
+              placeholder={"Enter the AddressLine1"}
+              className="form-control col-md-12"
+              type="text"
+              value={permanentAddress.addressLine1}
+              onChange={(e) =>setPermanentAddress({...permanentAddress,addressLine1:e.target.value})}
+            />
+          </div>
+          <div className="form-group col-md-5">
+            <label htmlFor="addressLine2">Address Line2</label>
+            <input
+              id="addressLine2"
+              placeholder={"Enter the AddressLine2"}
+              className="form-control col-md-12"
+             type="text"
+             value={permanentAddress.addressLine2}
+              onChange={(e) => setPermanentAddress({...permanentAddress,addressLine2:e.target.value})}
+            />
+          </div>
+          <div className="form-group col-md-5">
+            <label htmlFor="city">City</label>
+            <input
+              id="city"
+              placeholder={"Enter the city"}
+              className="form-control col-md-12"
+              type="text"
+              value={permanentAddress.city}
+              onChange={(e) => setPermanentAddress({...permanentAddress,city:e.target.value})}
+            />
+          </div>
+          <div className="form-group col-md-5">
+            <label htmlFor="state">State</label>
+            <input
+              id="state"
+              placeholder={"Enter the state"}
+              className="form-control col-md-12"
+              value={permanentAddress.state}
+              type="text"
+              onChange={(e) => setPermanentAddress({...permanentAddress,state:e.target.value})}
+            />
+          </div>
+          <div className="form-group col-md-10">
+            <label htmlFor="zipCode">Zip Code</label>
+            <input
+              id="zipCode"
+              placeholder={"Enter the zipCode"}
+              className="form-control col-md-12"
+              type="number"
+              value={permanentAddress.zipCode}
+              onChange={(e) =>setPermanentAddress({...permanentAddress,zipCode:e.target.value})}
+            />
+            </div>
           <div className="form-group col-md-10">
             <button type="submit" className="btn btn-primary">
               Save
