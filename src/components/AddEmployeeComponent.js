@@ -14,9 +14,9 @@ const AddEmployeeComponent = () => {
   const[city,setCity]=useState("")
   const[state,setState]=useState("")
  const[zipCode,setZipCode]=useState("")
- const[id]=useState("")
+ const[addressId,setAddressId]=useState("")
  const[presentAddress,setPresentAddress]=useState({
-  id:'',
+ addressId:'',
   addressLine1:'',
   addressLine2:'',
   city:'',
@@ -26,7 +26,7 @@ const AddEmployeeComponent = () => {
 
 
  const[permanentAddress,setPermanentAddress]=useState({
-  id:'',
+  addressId:'',
   addressLine1:'',
   addressLine2:'',
   city:'',
@@ -59,10 +59,7 @@ const AddEmployeeComponent = () => {
         setEverestEmailId("");
         setPassword("");
         setPersonalEmailId("");
-      
         setPresentAddress(setAddressLine1(""),setAddressLine2(""),setCity(""),setState(""),setZipCode(""));
-    
-  
        setPermanentAddress(setAddressLine1(""),setAddressLine2(""),setCity(""),setState(""),setZipCode(""));
   
   

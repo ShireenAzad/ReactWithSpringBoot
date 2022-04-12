@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams,Link } from "react-router-dom";
 
@@ -15,7 +16,7 @@ const UpdateEmployeeComponent = () => {
   const[city,setCity]=useState("");
   const[state,setState]=useState("");
  const[zipCode,setZipCode]=useState("");
-
+const[addressId,setAddressId]=useState("");
   const [employee, setEmployee] = useState({
     firstName: "",
     lastName: "",
@@ -26,49 +27,24 @@ const UpdateEmployeeComponent = () => {
     permanentAddress:""
   });
   const[presentAddress,setPresentAddress]=useState({
-    id:'',
+addressId:'',
     addressLine1:'',
     addressLine2:'',
     city:'',
     state:'',
     zipCode:''
    })
-  
+
   
    const[permanentAddress,setPermanentAddress]=useState({
-    id:'',
+ addressId:'',
     addressLine1:'',
     addressLine2:'',
     city:'',
     state:'',
     zipCode:''
    })
-  
-  useEffect(() => {
-    loadUser();
-  }, []);
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    employeeService
-      .updateEmployee(id, employee)
-      .then((response) => {
-        console.log("employee saved successfully", response);
-        setFirstName("");
-        setLastName("");
-        setEverestEmailId("");
-        setPassword("");
-        setPersonalEmailId("");
-        setPresentAddress(setAddressLine1(""),setAddressLine2(""),setCity(""),setState(""),setZipCode(""));
-  
-        setPermanentAddress(setAddressLine1(""),setAddressLine2(""),setCity(""),setState(""),setZipCode(""));
-   
-        
-      })
-      .catch((e) => console.log("error", e));
-  };
-
-  const loadUser = async () => {
+   const loadUser = async () => {
     employeeService.getEmployeeById(id).then((response) => {
       setFirstName(response.data.firstName);
       setLastName(response.data.lastName);
@@ -76,22 +52,42 @@ const UpdateEmployeeComponent = () => {
       setPassword(response.data.password);
       setPersonalEmailId(response.data.personalEmailId);
       setEmployee(response.data);
-      setPresentAddress(setAddressLine1(response.data.presentAddress.addressLine1),
-      setAddressLine2(response.data.presentAddress.addressLine2),
-      setCity(response.data.presentAddress.city),
-      setState(response.data.presentAddress.state),
-      setZipCode(response.data.presentAddress.zipCode));
-    
-  
-      setPermanentAddress(setAddressLine1(response.data.permanentAddress.addressLine1),
-      setAddressLine2(response.data.permanentAddress.addressLine2),
-      setCity(response.data.permanentAddress.city),
-      setState(response.data.permanentAddress.state),
-      setZipCode(response.data.permanentAddress.zipCode));
- 
-      console.log(response.data)
+      setPresentAddress(response.data.presentAddress)
+      setPermanentAddress(response.data.permanentAddress)
     }).catch((e) => console.log("error", e));
   };
+  useEffect(() => {
+    loadUser();
+  },[]);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const employee = {
+      firstName,
+      lastName,
+      everestEmailId,
+      password,
+      personalEmailId,
+      presentAddress,
+      permanentAddress 
+      
+    };
+    employeeService
+      .updateEmployee(id, employee)
+      .then((response) => {
+       setFirstName("");
+       setLastName("");
+       setEverestEmailId("");
+       setPassword("");
+       setPersonalEmailId("");
+       setPresentAddress(response.data.presentAddress.id,setAddressLine1(""),setAddressLine2(""),setCity(""),setState(""),setZipCode(""));
+      setPermanentAddress(response.data.permanentAddress.id,setAddressLine1(""),setAddressLine2(""),setCity(""),setState(""),setZipCode(""));
+      console.log("employee saved successfully", response);
+      })
+      .catch((e) => console.log("error", e));
+  };
+
+ 
 
   return (
     <div className="container">
