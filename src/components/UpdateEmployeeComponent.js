@@ -81,8 +81,7 @@ addressId:'',
        setPassword("");
        setPersonalEmailId("");
        setPresentAddress(response.data.presentAddress.id,setAddressLine1(""),setAddressLine2(""),setCity(""),setState(""),setZipCode(""));
-      setPermanentAddress(response.data.permanentAddress.id,setAddressLine1(""),setAddressLine2(""),setCity(""),setState(""),setZipCode(""));
-      console.log("employee saved successfully", response);
+       setPermanentAddress(response.data.permanentAddress.id,setAddressLine1(""),setAddressLine2(""),setCity(""),setState(""),setZipCode(""));  
       })
       .catch((e) => console.log("error", e));
   };

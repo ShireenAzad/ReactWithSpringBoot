@@ -53,7 +53,7 @@ const AddEmployeeComponent = () => {
     employeeService
       .createEmployee(employee)
       .then((response) => {
-        console.log("employee saved successfully", response);
+      
         setFirstName("");
         setLastName("");
         setEverestEmailId("");

@@ -7,8 +7,9 @@ import FooterComponent from './components/FooterComponent';
 import AddEmployeeComponent from './components/AddEmployeeComponent';
 import UpdateEmployeeComponent from './components/UpdateEmployeeComponent';
 import Employee from './components/Employee'
+
 function App() {
-   
+
   return (
     <div >
         <Router>
