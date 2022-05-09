@@ -20,7 +20,6 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - working-directory: src/main/java/com/everestengineering/employeeportalapplication/frontend/
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
@@ -28,5 +27,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: src/main/java/com/everestengineering/employeeportalapplication/frontend/package-lock.json
+        
+    - run: npm ci
+    - working-directory: src/main/java/com/everestengineering/employeeportalapplication/frontend/
     - run: npm run build --if-present
+    - working-directory: src/main/java/com/everestengineering/employeeportalapplication/frontend/
     - run: npm test
+    - working-directory: src/main/java/com/everestengineering/employeeportalapplication/frontend/
