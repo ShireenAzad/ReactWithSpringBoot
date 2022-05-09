@@ -26,6 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        cache-dependency-path: src/main/java/com/everestengineering/employeeportalapplication/frontend/package-lock.json
     - name: running npm ci
       working-directory: src/main/java/com/everestengineering/employeeportalapplication/frontend/
       run: npm ci
