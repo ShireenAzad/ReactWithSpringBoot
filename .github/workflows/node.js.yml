@@ -30,12 +30,12 @@ jobs:
     - name: running npm ci
       working-directory: src/main/java/com/everestengineering/employeeportalapplication/frontend/
       run: npm ci
-    - name: running npm run build --if-present
-      working-directory: src/main/java/com/everestengineering/employeeportalapplication/frontend/
-      run: npm run build --if-present
     - name: static server installation
       working-directory: src/main/java/com/everestengineering/employeeportalapplication/frontend/
       run: npm install -g serve | serve -s build | serve -s build -l 3000
+    - name: running npm run build --if-present
+      working-directory: src/main/java/com/everestengineering/employeeportalapplication/frontend/
+      run: npm run build --if-present
     - name: npm test and code coverage
       working-directory: src/main/java/com/everestengineering/employeeportalapplication/frontend/
       run: npm test -- --coverage
